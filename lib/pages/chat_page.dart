@@ -1,6 +1,7 @@
-import 'package:social_app/components/my_drawer.dart';
+import 'package:get/get.dart';
 import 'package:social_app/components/user_tile.dart';
 import 'package:social_app/pages/conversation_page.dart';
+import 'package:social_app/pages/home_page.dart';
 import 'package:social_app/services/auth/auth_service.dart';
 import 'package:social_app/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  // chat and auth service
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
   @override
@@ -20,13 +20,17 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: Text("${_authService.getCurrentUser()!.email}"),
+        title: Text("${_authService.getCurrentUser()!.displayName}"),
+        leading: IconButton(
+            onPressed: ()=> Get.to(()=> const HomePage()),
+            icon: const Icon(Icons.arrow_back),
+        ),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.grey), // drawer color
       ),
-      endDrawer: const MyDrawer(), // drawer vs endDrawer
+      //endDrawer: const MyDrawer(), // drawer vs endDrawer
       body: Column(
         children: [
           const Text("Select an user to chat: ", style: TextStyle(fontSize: 18)),
@@ -59,7 +63,7 @@ class _ChatPageState extends State<ChatPage> {
     // display all users except current user
     if(userData["uid"] != _authService.getCurrentUser()!.uid){
       return UserTile(
-        text: userData["email"],
+        text: userData["email"], // ----------------------------------------------- handle
         onTap: (){
           Navigator.push(
             context,

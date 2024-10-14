@@ -44,11 +44,15 @@ ThemeData lightMode = ThemeData(
     ),
   ),
   iconTheme: IconThemeData(
-    color: Colors.pink[300], // doesn't work if icon is in CircleAvatar --------
+    color: Colors.blue[300], // doesn't work if icon is in CircleAvatar --------
   ),
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.grey.shade200,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Colors.grey.shade500,
+    shape: const CircleBorder(),
   ),
 );
 
@@ -71,5 +75,9 @@ ThemeData darkMode = ThemeData(
         borderRadius: BorderRadius.circular(20),
       ),
     ),
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Colors.grey.shade700,
+    shape: const CircleBorder(),
   ),
 );

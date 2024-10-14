@@ -4,9 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:social_app/components/my_drawer.dart';
 import 'package:social_app/data/image_data.dart';
-import 'package:social_app/pages/chat_page.dart';
-import 'package:social_app/pages/update_profile_page.dart';
 import 'package:social_app/state_holders/home_page_controller.dart';
 import 'package:social_app/utility/assets_path.dart';
 import 'package:social_app/components/appBar_avatar.dart';
@@ -65,6 +64,7 @@ class _HomePageState extends State<HomePage> {
             child: AppBarAvatar(),
           ),
           title: const Center(child: AppLogo()),
+          /*
           actions: [
             InkWell(
               onTap: (){
@@ -123,7 +123,9 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(width: 8),
           ],
+          */
         ),
+        endDrawer: const MyDrawer(), // drawer vs endDrawer // disable actions in AppBar to show endDrawer
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: _controller.inProgress ?
@@ -131,13 +133,13 @@ class _HomePageState extends State<HomePage> {
             //mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: (){
-                  _controller.uploadImage(context); // upload to firebase
-                },
-                child: const Text('share a photo'),
-              ),
-              const SizedBox(height: 8),
+              // ElevatedButton(
+              //   onPressed: (){
+              //     _controller.uploadImage(context); // upload to firebase
+              //   },
+              //   child: const Text('share a photo'),
+              // ),
+              // const SizedBox(height: 8),
               // vertical ListView/GridView all posts
               // -> by which user, picture, comments
               TabBar( // -----
@@ -152,6 +154,12 @@ class _HomePageState extends State<HomePage> {
               buildPostsView(),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _controller.uploadImage(context);
+          },
+          child: const Icon(Icons.add),
         ),
         //bottomNavigationBar: ,
       ),

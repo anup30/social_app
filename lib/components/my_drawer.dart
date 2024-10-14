@@ -1,9 +1,14 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:social_app/pages/home_page.dart';
+import 'package:social_app/pages/chat_page.dart';
 import 'package:social_app/pages/settings_page.dart';
+import 'package:social_app/pages/update_profile_page.dart';
 import 'package:social_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:social_app/utility/assets_path.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -24,7 +29,7 @@ class MyDrawer extends StatelessWidget {
                 child: Icon(
                   Icons.message,
                   //color: Theme.of(context).colorScheme.primary, --------------------
-                  color: Colors.amber,
+                  //color: Colors.amber,
                   size: 40,
                 ),
               ),
@@ -33,11 +38,11 @@ class MyDrawer extends StatelessWidget {
           Padding(
               padding: const EdgeInsets.only(left: 25),
             child: ListTile(
-              title: const Text("H O M E"),
+              title: const Text("C H A T"),
               leading: const Icon(Icons.home),
               onTap: (){
                 Navigator.pop(context); // pop drawer
-                Get.off(()=> const HomePage());
+                Get.off(()=> const ChatPage());
               },
             ),
           ),
@@ -49,19 +54,70 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(Icons.settings),
               onTap: (){
                 Navigator.pop(context); // pop drawer
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const SettingsPage(),
-                ));
+                Get.to(()=> const SettingsPage());
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: ListTile(
+              title: const Text("UpdateProfile"),
+              leading: const Icon(Icons.edit),
+              onTap: (){
+                Navigator.pop(context); // pop drawer
+                Get.to(()=> const UpdateProfilePage());
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: ListTile(
+              title: const Text("C H A T"),
+              leading: SvgPicture.asset(
+                AssetsPath.message,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.inversePrimary, BlendMode.srcIn,
+                ),
+              ),
+              onTap: (){
+                Navigator.pop(context); // pop drawer
+                Get.to(()=> const ChatPage()); // if drawer in homepage, homepage is also popped !
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
+            child: ListTile(
+              title: const Text("Notifications"),
+              leading: SvgPicture.asset(
+                AssetsPath.notification,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.inversePrimary, BlendMode.srcIn,
+                ),
+              ),
+              onTap: (){
+                Navigator.pop(context); // pop drawer
+                Get.to(()=> const ChatPage());
               },
             ),
           ),
           // logout list tile
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.only(left: 25, bottom: 25),
+            padding: const EdgeInsets.only(left: 25),
             child: ListTile(
               title: const Text("L O G O U T"),
               leading: const Icon(Icons.logout),
-              onTap: logout,
+              //onTap: logout,
+              onTap: ()=> FirebaseAuth.instance.signOut(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25, bottom: 25),
+            child: ListTile(
+              title: const Text("Exit App"),
+              leading: const Icon(Icons.close),
+              onTap: ()=> SystemNavigator.pop(),
             ),
           ),
         ],
