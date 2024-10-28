@@ -1,4 +1,6 @@
 // social_app : upload photos with comments, chat,
+// to add: comment to your pic post, in HomeScreen
+// ExpansionTile() : https://api.flutter.dev/flutter/material/ExpansionTile-class.html
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';

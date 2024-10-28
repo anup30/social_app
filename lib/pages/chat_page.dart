@@ -63,7 +63,7 @@ class _ChatPageState extends State<ChatPage> {
     // display all users except current user
     if(userData["uid"] != _authService.getCurrentUser()!.uid){
       return UserTile(
-        text: userData["email"], // ----------------------------------------------- handle
+        userInfo: userData, // -------------------- userData["email"] email / handle
         onTap: (){
           Navigator.push(
             context,

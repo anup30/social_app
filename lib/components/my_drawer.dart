@@ -42,7 +42,7 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(Icons.home),
               onTap: (){
                 Navigator.pop(context); // pop drawer
-                Get.off(()=> const ChatPage());
+                Get.to(()=> const ChatPage());
               },
             ),
           ),
@@ -85,22 +85,22 @@ class MyDrawer extends StatelessWidget {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: ListTile(
-              title: const Text("Notifications"),
-              leading: SvgPicture.asset(
-                AssetsPath.notification,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.inversePrimary, BlendMode.srcIn,
-                ),
-              ),
-              onTap: (){
-                Navigator.pop(context); // pop drawer
-                Get.to(()=> const ChatPage());
-              },
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 25),
+          //   child: ListTile(
+          //     title: const Text("Notifications"),
+          //     leading: SvgPicture.asset(
+          //       AssetsPath.notification,
+          //       colorFilter: ColorFilter.mode(
+          //         Theme.of(context).colorScheme.inversePrimary, BlendMode.srcIn,
+          //       ),
+          //     ),
+          //     onTap: (){
+          //       Navigator.pop(context); // pop drawer
+          //       Get.to(()=> const ChatPage());
+          //     },
+          //   ),
+          // ),
           // logout list tile
           const Spacer(),
           Padding(

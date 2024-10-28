@@ -21,6 +21,7 @@ class SocialApp extends StatelessWidget {
 }
 
 ThemeData lightMode = ThemeData(
+  //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
   colorScheme: ColorScheme.light(
     //onPrimary: ,
     //background: Colors.grey.shade300, //deprecated

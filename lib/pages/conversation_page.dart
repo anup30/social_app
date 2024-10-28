@@ -71,7 +71,7 @@ class _ConversationPageState extends State<ConversationPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: const Text("chat page"),
+        title: const Text("conversation page"),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey,
         elevation: 0,
