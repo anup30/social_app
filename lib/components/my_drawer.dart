@@ -1,24 +1,23 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:social_app/pages/chat_page.dart';
-import 'package:social_app/pages/settings_page.dart';
 import 'package:social_app/pages/update_profile_page.dart';
 import 'package:social_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:social_app/state_holders/theme_controller.dart';
 import 'package:social_app/utility/assets_path.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
-
+  void logout(){
+    final auth = AuthService();
+    auth.signOut();
+  }
   @override
   Widget build(BuildContext context) {
-    void logout(){
-      final auth = AuthService();
-      auth.signOut();
-    }
+    ThemeController themeController = Get.find();
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
@@ -34,27 +33,30 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
           ),
-          // home list tile
           Padding(
-              padding: const EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.only(left: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Obx(() => themeController.isDarkMode.value
+                    ? const Text("Dark Mode")
+                    : const Text("Light Mode")
+                ),
+                Switch(
+                  value: themeController.isDarkMode.value,
+                  onChanged: (value)=> themeController.toggleTheme(),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 25),
             child: ListTile(
               title: const Text("C H A T"),
               leading: const Icon(Icons.home),
               onTap: (){
                 Navigator.pop(context); // pop drawer
                 Get.to(()=> const ChatPage());
-              },
-            ),
-          ),
-          // settings list tile
-          Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: ListTile(
-              title: const Text("S E T T I N G S"),
-              leading: const Icon(Icons.settings),
-              onTap: (){
-                Navigator.pop(context); // pop drawer
-                Get.to(()=> const SettingsPage());
               },
             ),
           ),
