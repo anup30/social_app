@@ -28,8 +28,5 @@ void main()async{
 
 // flutter clean, flutter pub get, flutter run,
 
-// anup1@example.com, pw: anup123
-// anup2@example.com, pw: anup123
-// cori@example.com, pw: cori123
 
 
